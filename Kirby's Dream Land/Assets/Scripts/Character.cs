@@ -98,7 +98,7 @@ public class Character : MonoBehaviour
     /// </summary>
     public virtual void Attack()
     {
-
+        anim.SetBool("AttackFlag", true);
     }
 
     /// <summary>
@@ -119,6 +119,10 @@ public class Character : MonoBehaviour
 
     }
 
+    /// <summary>
+    /// 接地判定
+    /// </summary>
+    /// <param name="collision"></param>
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.tag == "Ground")

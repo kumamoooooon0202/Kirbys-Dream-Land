@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class Player : Character
 {
-    private int life;
-    private float hoveringSpeed;
+    [SerializeField] private int life;
+    [SerializeField] private float hoveringSpeed;
     private bool hoveringFlag;
 
     void Start()
@@ -16,6 +16,18 @@ public class Player : Character
 
     void Update()
     {
+        if (Input.GetKey(KeyCode.KeypadEnter))
+        {
+            Attack();
+
+            // 攻撃をしている時は動けない為return
+            return;
+        }
+
+        if (Input.GetKeyUp(KeyCode.KeypadEnter))
+        {
+            anim.SetBool("AttackFlag", false);
+        }
 
         #region 移動処理
         move_x = 0f;
@@ -51,6 +63,7 @@ public class Player : Character
         rb.velocity = new Vector2(move.x, rb.velocity.y);
         #endregion 
 
+
         #region Animation関連
         if (rb.velocity.x <= 1 || rb.velocity.x >= -1)
         {
@@ -76,6 +89,8 @@ public class Player : Character
             anim.SetBool("isGround", false);
         }
         #endregion
+
+
     }
 
     private void ReStart()
