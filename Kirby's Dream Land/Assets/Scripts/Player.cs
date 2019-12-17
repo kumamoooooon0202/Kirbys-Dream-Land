@@ -10,12 +10,72 @@ public class Player : Character
 
     void Start()
     {
-        
+        anim = GetComponent<Animator>();
+        rb = GetComponent<Rigidbody2D>();
     }
 
     void Update()
     {
-        
+
+        #region 移動処理
+        move_x = 0f;
+        // ジャンプの処理
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            Jump();
+        }
+
+        // 歩く処理
+        if (Input.GetKey(KeyCode.A))
+        {
+            Walk(-1);
+        }
+
+        if (Input.GetKey(KeyCode.D))
+        {
+            Walk(1);
+        }
+
+        // 走る処理
+        if (Input.GetKey(KeyCode.LeftShift) && Input.GetKey(KeyCode.A))
+        {
+            Run(-1);
+        }
+
+        if (Input.GetKey(KeyCode.LeftShift) && Input.GetKey(KeyCode.D))
+        {
+            Run(1);
+        }
+
+        var move = move_x * transform.right;
+        rb.velocity = new Vector2(move.x, rb.velocity.y);
+        #endregion 
+
+        #region Animation関連
+        if (rb.velocity.x <= 1 || rb.velocity.x >= -1)
+        {
+            anim.SetInteger("walkSpeed", 0);
+        }
+
+        if (rb.velocity.x > 1 || rb.velocity.x < -1)
+        {
+            anim.SetInteger("walkSpeed", 1);
+        }
+
+        if (rb.velocity.x > 3 || rb.velocity.x < -3)
+        {
+            anim.SetInteger("walkSpeed", 3);
+        }
+
+        if (groundFlag)
+        {
+            anim.SetBool("isGround", true);
+        }
+        else
+        {
+            anim.SetBool("isGround", false);
+        }
+        #endregion
     }
 
     private void ReStart()

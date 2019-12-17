@@ -11,11 +11,13 @@ public class Character : MonoBehaviour
     [SerializeField] protected bool groundFlag;
     [SerializeField] protected bool attackFlag;
     [SerializeField] protected bool invincibleFlag;
-    private float directionSpeed = 0;
 
-    private Rigidbody2D rb;
+    protected float move_x;
 
-    private Animator anim;
+    protected Rigidbody2D rb;
+    protected Animator anim;
+
+    DirectionType myDirectionType;
 
     protected enum DirectionType
     {
@@ -38,76 +40,80 @@ public class Character : MonoBehaviour
 
     void Start()
     {
-        anim = GetComponent<Animator>();
-        rb = GetComponent<Rigidbody2D>();
+        
     }
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            rb.velocity = new Vector2(0, jumpSpeed);
-            anim.SetTrigger("jumpFlag");
-        }
-
-        if (Input.GetKey(KeyCode.A))
-        {
-            rb.velocity = new Vector2(-moveSpeed, 0);
-            this.transform.localScale = new Vector3(-1, 1, 1);
-        }
-
-        if (Input.GetKey(KeyCode.D))
-        {
-            rb.velocity = new Vector2(moveSpeed, 0);
-            this.transform.localScale = new Vector3(1, 1, 1);
-        }
-
-
-        if (rb.velocity.x <= 1 || rb.velocity.x >= -1)
-        {
-            anim.SetInteger("walkSpeed", 0);
-        }
-
-        if (rb.velocity.x > 1 || rb.velocity.x < -1)
-        {
-            anim.SetInteger("walkSpeed", 1);
-        }
-
-        if (groundFlag)
-        {
-            anim.SetBool("isGround", true);
-        }
-        else
-        {
-            anim.SetBool("isGround", false);
-        }
-    }
-
-    public virtual void Walk()
-    {
         
     }
 
-    public void Run()
+    /// <summary>
+    /// 歩く
+    /// </summary>
+    /// <param name="direction">1:右 -1:左</param>
+    public virtual void Walk(int direction)
     {
-
+        move_x += moveSpeed * direction;
+        this.transform.localScale = new Vector3(direction, 1, 1);
+        if (direction < 0)
+        {
+            myDirectionType = DirectionType.left;
+        }
+        else
+        {
+            myDirectionType = DirectionType.right;
+        }
     }
 
+    /// <summary>
+    /// 走る
+    /// </summary>
+    /// <param name="direction">1:右 -1:左</param>
+    public void Run(int direction)
+    {
+        move_x += moveSpeed * direction * 2;
+        this.transform.localScale = new Vector3(direction, 1, 1);
+        if (direction < 0)
+        {
+            myDirectionType = DirectionType.left;
+        }
+        else
+        {
+            myDirectionType = DirectionType.right;
+        }
+    }
+
+    /// <summary>
+    /// ジャンプ
+    /// </summary>
     public void Jump()
     {
-
+        rb.AddForce(Vector3.up * jumpSpeed);
+        anim.SetTrigger("jumpFlag");
     }
 
+    /// <summary>
+    /// 攻撃
+    /// </summary>
     public virtual void Attack()
     {
 
     }
 
+    /// <summary>
+    /// ダメージ
+    /// </summary>
+    /// <param name="power">ダメージ量</param>
     public void Damege(int power)
     {
 
     }
 
+    /// <summary>
+    /// 回復
+    /// </summary>
+    /// <param name="val">回復量</param>
     public void Recover(int val)
     {
 
