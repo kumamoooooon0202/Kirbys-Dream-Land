@@ -89,8 +89,6 @@ public class Player : Character
             anim.SetBool("isGround", false);
         }
         #endregion
-
-
     }
 
     private void ReStart()
@@ -107,4 +105,13 @@ public class Player : Character
     {
         base.Attack();
     }
+
+    // 当たり続けている間、値がとれたらいいなぁ
+    //private void OnTriggerStay2D(Collider2D collision)
+    //{
+    //    if (collision.gameObject.tag == "Door")
+    //    {
+    //        Debug.Log("aaa");
+    //    }
+    //}
 }

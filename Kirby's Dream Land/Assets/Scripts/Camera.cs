@@ -18,9 +18,17 @@ public class Camera : MonoBehaviour
         {
             transform.position = new Vector3(0, 0, -10);
         }
-        if (transform.position.x >= 23)
+        if (transform.position.x >= 52)
         {
-            transform.position = new Vector3(23, 0, -10);
+            transform.position = new Vector3(52, 0, -10);
+        }
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.name == "aaa")
+        {
+            Debug.Log("aaa");
         }
     }
 }
