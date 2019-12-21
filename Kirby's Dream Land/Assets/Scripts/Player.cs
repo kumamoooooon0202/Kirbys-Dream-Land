@@ -12,6 +12,7 @@ public class Player : Character
     {
         anim = GetComponent<Animator>();
         rb = GetComponent<Rigidbody2D>();
+        mystatus = Status.normal;
     }
 
     void Update()
@@ -104,14 +105,13 @@ public class Player : Character
     public override void Attack()
     {
         base.Attack();
+        anim.SetBool("AttackFlag", true);
     }
 
-    // 当たり続けている間、値がとれたらいいなぁ
-    //private void OnTriggerStay2D(Collider2D collision)
-    //{
-    //    if (collision.gameObject.tag == "Door")
-    //    {
-    //        Debug.Log("aaa");
-    //    }
-    //}
+    public override void Jump()
+    {
+        base.Jump();
+        if (groundFlag == false) { return; }
+        anim.SetTrigger("jumpFlag");
+    }
 }

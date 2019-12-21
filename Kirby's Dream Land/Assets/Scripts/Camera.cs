@@ -4,31 +4,30 @@ using UnityEngine;
 
 public class Camera : MonoBehaviour
 {
+    [SerializeField] private Transform farstBG;
+    [SerializeField] private Transform lastBG;
+
     [SerializeField] private GameObject player;
+
+    // カメラと壁のposisionの差
+    private float posDif;
+
     void Start()
     {
-        
+        posDif = this.transform.position.x - farstBG.position.x; 
     }
 
     void Update()
     {
         transform.position = new Vector3(player.transform.position.x, 0, -10);
 
-        if (transform.position.x < 0)
+        if (transform.position.x < farstBG.position.x + posDif)
         {
-            transform.position = new Vector3(0, 0, -10);
+            transform.position = new Vector3(farstBG.position.x + posDif, 0, -10);
         }
-        if (transform.position.x >= 52)
+        if (transform.position.x >= lastBG.position.x - posDif)
         {
-            transform.position = new Vector3(52, 0, -10);
-        }
-    }
-
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        if (collision.gameObject.name == "aaa")
-        {
-            Debug.Log("aaa");
+            transform.position = new Vector3(lastBG.position.x - posDif, 0, -10);
         }
     }
 }

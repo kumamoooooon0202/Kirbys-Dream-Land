@@ -144,6 +144,7 @@ MonoBehaviour:
   groundFlag: 0
   attackFlag: 0
   invincibleFlag: 0
+  mystatus: 1
   life: 0
   hoveringSpeed: 0
 --- !u!58 &3111027512549868482

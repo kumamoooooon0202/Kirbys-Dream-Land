@@ -17,7 +17,8 @@ public class Character : MonoBehaviour
     protected Rigidbody2D rb;
     protected Animator anim;
 
-    DirectionType myDirectionType;
+    protected DirectionType myDirectionType;
+    [SerializeField]　protected Status mystatus;
 
     protected enum DirectionType
     {
@@ -36,16 +37,6 @@ public class Character : MonoBehaviour
         fire,
         cutter,
         seord,
-    }
-
-    void Start()
-    {
-        
-    }
-
-    void Update()
-    {
-        
     }
 
     /// <summary>
@@ -87,10 +78,9 @@ public class Character : MonoBehaviour
     /// <summary>
     /// ジャンプ
     /// </summary>
-    public void Jump()
+    public virtual void Jump()
     {
         rb.AddForce(Vector3.up * jumpSpeed);
-        anim.SetTrigger("jumpFlag");
     }
 
     /// <summary>
@@ -98,7 +88,45 @@ public class Character : MonoBehaviour
     /// </summary>
     public virtual void Attack()
     {
-        anim.SetBool("AttackFlag", true);
+        switch (mystatus)
+        {
+            // 敵
+            case Status.enemy:
+                break;
+
+            // 通常
+            case Status.normal:
+                Debug.Log("吸い込み攻撃！");
+                break;
+
+            // 頬張り
+            case Status.cheek:
+                Debug.Log("吐き出し攻撃！");
+                break;
+
+            // ビーム
+            case Status.beam:
+                Debug.Log("ビーム攻撃！");
+                break;
+
+            // ファイア
+            case Status.fire:
+                Debug.Log("ファイア攻撃！");
+                break;
+
+            // カッター
+            case Status.cutter:
+                Debug.Log("カッター攻撃！");
+                break;
+
+            // ソード
+            case Status.seord:
+                Debug.Log("ソード攻撃！");
+                break;
+
+            default:
+                break;
+        }
     }
 
     /// <summary>
