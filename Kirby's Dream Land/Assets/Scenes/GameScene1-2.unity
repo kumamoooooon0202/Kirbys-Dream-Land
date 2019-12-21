@@ -176,7 +176,7 @@ PrefabInstance:
     - target: {fileID: 6327916067226563773, guid: f550d08a0bc5fc34ba4efd9dd591acfd,
         type: 3}
       propertyPath: m_RootOrder
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6327916067226563773, guid: f550d08a0bc5fc34ba4efd9dd591acfd,
         type: 3}
@@ -193,6 +193,16 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6327916067226563770, guid: f550d08a0bc5fc34ba4efd9dd591acfd,
+        type: 3}
+      propertyPath: farstBG
+      value: 
+      objectReference: {fileID: 2017164921}
+    - target: {fileID: 6327916067226563770, guid: f550d08a0bc5fc34ba4efd9dd591acfd,
+        type: 3}
+      propertyPath: lastBG
+      value: 
+      objectReference: {fileID: 106875608}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f550d08a0bc5fc34ba4efd9dd591acfd, type: 3}
 --- !u!1 &227260813 stripped
@@ -251,7 +261,7 @@ PrefabInstance:
     - target: {fileID: 4267453202460437867, guid: 685c3aca3dbbb924b9e70a2569788d58,
         type: 3}
       propertyPath: m_RootOrder
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 4267453202460437867, guid: 685c3aca3dbbb924b9e70a2569788d58,
         type: 3}
@@ -1957,7 +1967,7 @@ Grid:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2100530835}
   m_Enabled: 1
-  m_CellSize: {x: 1, y: 1, z: 0}
+  m_CellSize: {x: 1.256, y: 1.256, z: 0}
   m_CellGap: {x: 0, y: 0, z: 0}
   m_CellLayout: 0
   m_CellSwizzle: 0

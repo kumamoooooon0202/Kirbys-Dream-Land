@@ -4,21 +4,26 @@ using UnityEngine;
 
 public class Character : MonoBehaviour
 {
-    [SerializeField] protected int hp;
-    [SerializeField] protected int max_hp;
+    [SerializeField] protected int hp = 10;
+    [SerializeField] protected int max_hp = 10;
     [SerializeField] protected float moveSpeed;
     [SerializeField] protected float jumpSpeed;
     [SerializeField] protected bool groundFlag;
     [SerializeField] protected bool attackFlag;
     [SerializeField] protected bool invincibleFlag;
 
+    [SerializeField] protected Transform farstBG;
+    [SerializeField] protected Transform lastBG;
+
+
     protected float move_x;
+    protected float posDif;
 
     protected Rigidbody2D rb;
     protected Animator anim;
 
     protected DirectionType myDirectionType;
-    [SerializeField]　protected Status mystatus;
+    [SerializeField] protected Status mystatus;
 
     protected enum DirectionType
     {
@@ -145,6 +150,21 @@ public class Character : MonoBehaviour
     public void Recover(int val)
     {
 
+    }
+
+    /// <summary>
+    /// 移動制限
+    /// </summary>
+    protected void MoveResriction()
+    {
+        if (transform.position.x < farstBG.position.x + posDif)
+        {
+            transform.position = new Vector3(farstBG.position.x + posDif, this.transform.position.y, 0);
+        }
+        if (transform.position.x > lastBG.position.x - posDif)
+        {
+            transform.position = new Vector3(lastBG.position.x - posDif, this.transform.position.y, 0);
+        }
     }
 
     /// <summary>

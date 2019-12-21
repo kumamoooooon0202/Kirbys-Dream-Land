@@ -13,6 +13,7 @@ public class Player : Character
         anim = GetComponent<Animator>();
         rb = GetComponent<Rigidbody2D>();
         mystatus = Status.normal;
+        posDif = transform.position.x - farstBG.position.x;
     }
 
     void Update()
@@ -62,6 +63,7 @@ public class Player : Character
 
         var move = move_x * transform.right;
         rb.velocity = new Vector2(move.x, rb.velocity.y);
+        MoveResriction();
         #endregion 
 
 

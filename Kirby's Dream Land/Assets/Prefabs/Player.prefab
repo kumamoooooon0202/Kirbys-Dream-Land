@@ -144,6 +144,8 @@ MonoBehaviour:
   groundFlag: 0
   attackFlag: 0
   invincibleFlag: 0
+  farstBG: {fileID: 0}
+  lastBG: {fileID: 0}
   mystatus: 1
   life: 0
   hoveringSpeed: 0
