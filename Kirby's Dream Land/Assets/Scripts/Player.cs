@@ -36,6 +36,7 @@ public class Player : Character
         // ジャンプの処理
         if (Input.GetKeyDown(KeyCode.Space))
         {
+            if (mystatus == Status.cheek && groundFlag == false) { return; }
             Jump();
         }
 
