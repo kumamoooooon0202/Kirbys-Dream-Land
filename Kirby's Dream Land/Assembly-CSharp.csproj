@@ -68,6 +68,7 @@
     <Compile Include="Assets\Scripts\DoorSceneChange.cs" />
     <Compile Include="Assets\Scripts\Enemy.cs" />
     <Compile Include="Assets\Scripts\Player.cs" />
+    <Compile Include="Assets\Scripts\TextController.cs" />
     <None Include="Assets\Resources\Sprite\BayatGames\Free Platform Game Assets\Readme.txt" />
     <Reference Include="Unity.Timeline.Editor">
       <HintPath>C:/Users/tokku/OneDrive/ドキュメント/Unity Project/火曜1,2限 Unity課題/Kirbys-Dream-Land/Kirby's Dream Land/Library/ScriptAssemblies/Unity.Timeline.Editor.dll</HintPath>

@@ -17,6 +17,7 @@ public class Character : MonoBehaviour
 
 
     protected float move_x;
+    protected float move_y;
     protected float posDif;
 
     protected Rigidbody2D rb;
@@ -86,6 +87,7 @@ public class Character : MonoBehaviour
     public virtual void Jump()
     {
         rb.AddForce(Vector3.up * jumpSpeed);
+        //move_y += jumpSpeed;
     }
 
     /// <summary>
@@ -164,6 +166,12 @@ public class Character : MonoBehaviour
         if (transform.position.x > lastBG.position.x - posDif)
         {
             transform.position = new Vector3(lastBG.position.x - posDif, this.transform.position.y, 0);
+        }
+
+        if (transform.position.y > 4.5)
+        {
+            transform.position = new Vector3(this.transform.position.x, 4.5f, 0);
+            rb.velocity = new Vector2(0, 0);
         }
     }
 

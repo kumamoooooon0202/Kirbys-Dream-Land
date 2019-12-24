@@ -67,7 +67,6 @@ public class Player : Character
         MoveResriction();
         #endregion 
 
-
         #region Animation関連
         if (rb.velocity.x <= 1 || rb.velocity.x >= -1)
         {
