@@ -42,7 +42,7 @@ public class Character : MonoBehaviour
         beam,
         fire,
         cutter,
-        seord,
+        sword,
     }
 
     /// <summary>
@@ -127,7 +127,7 @@ public class Character : MonoBehaviour
                 break;
 
             // ソード
-            case Status.seord:
+            case Status.sword:
                 Debug.Log("ソード攻撃！");
                 break;
 
@@ -179,7 +179,7 @@ public class Character : MonoBehaviour
     /// 接地判定
     /// </summary>
     /// <param name="collision"></param>
-    private void OnCollisionEnter2D(Collision2D collision)
+    private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.tag == "Ground")
         {
@@ -187,7 +187,7 @@ public class Character : MonoBehaviour
         }
     }
 
-    private void OnCollisionExit2D(Collision2D collision)
+    private void OnTriggerExit2D(Collider2D collision)
     {
         if (collision.gameObject.tag == "Ground")
         {
