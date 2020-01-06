@@ -33,6 +33,7 @@ public class Player : Character
 
         #region 移動処理
         move_x = 0f;
+        move_y = 0f;
         // ジャンプの処理
         if (Input.GetKeyDown(KeyCode.Space))
         {
@@ -60,6 +61,11 @@ public class Player : Character
         if (Input.GetKey(KeyCode.LeftShift) && Input.GetKey(KeyCode.D))
         {
             Run(1);
+        }
+
+        if (groundFlag)
+        {
+            
         }
 
         var move = move_x * transform.right;
@@ -91,6 +97,13 @@ public class Player : Character
         {
             anim.SetBool("isGround", false);
         }
+
+        if (rb.velocity.y < -1)
+        {
+            anim.SetTrigger("FallFlag");
+        }
+
+        Debug.Log(rb.velocity.y);
         #endregion
     }
 
@@ -113,7 +126,7 @@ public class Player : Character
     public override void Jump()
     {
         base.Jump();
-        if (groundFlag == false) { return; }
+        //if (groundFlag == false) { return; }
         anim.SetTrigger("jumpFlag");
     }
 }
