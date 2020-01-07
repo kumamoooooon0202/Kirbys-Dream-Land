@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Player : Character
 {
-    [SerializeField] private int life;
+    public static int life = 3;
     [SerializeField] private float hoveringSpeed;
     private bool hoveringFlag;
 
@@ -18,6 +18,11 @@ public class Player : Character
 
     void Update()
     {
+        if (Input.GetMouseButtonDown(0))
+        {
+            HP -= 1;
+        }
+
         if (Input.GetKey(KeyCode.KeypadEnter))
         {
             Attack();

@@ -4,8 +4,12 @@ using UnityEngine;
 
 public class Character : MonoBehaviour
 {
-    [SerializeField] protected int hp = 10;
-    [SerializeField] protected int max_hp = 10;
+    protected static int HP = 6;
+    public static int CharacerHp()
+    {
+        return HP;
+    }
+    [SerializeField] protected int max_hp = 6;
     [SerializeField] protected float moveSpeed;
     [SerializeField] protected float jumpSpeed;
     [SerializeField] protected bool groundFlag;

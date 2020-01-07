@@ -16,6 +16,6 @@ public class TextController : MonoBehaviour
 
     void Update()
     {
-        
+        kirbyLife.text = "×" + Player.life.ToString("00");
     }
 }
