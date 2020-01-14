@@ -107,6 +107,28 @@ public class Character : MonoBehaviour
             // 通常
             case Status.normal:
                 Debug.Log("吸い込み攻撃！");
+                if (myDirectionType == DirectionType.right)
+                {
+                    Vector3 pos = new Vector2(this.transform.position.x + 2.5f, transform.position.y);
+                    RaycastHit2D hit = Physics2D.Raycast(pos, new Vector2(1, 0), 1f);
+                    Debug.DrawLine(this.transform.position, pos, Color.red);
+                    if (hit.collider == null) { return; }
+                    if (hit.collider.tag == "Enemy")
+                    {
+                        Debug.Log(hit.collider);
+                    }
+                }
+                if (myDirectionType == DirectionType.left)
+                {
+                    Vector3 pos = new Vector2(this.transform.position.x - 2.5f, transform.position.y);
+                    RaycastHit2D hit = Physics2D.Raycast(pos, new Vector2(-1, 0), 1f);
+                    Debug.DrawLine(this.transform.position, pos, Color.red);
+                    if (hit.collider == null) { return; }
+                    if (hit.collider.tag == "Enemy")
+                    {
+                        Debug.Log(hit.collider);
+                    }
+                }
                 break;
 
             // 頬張り

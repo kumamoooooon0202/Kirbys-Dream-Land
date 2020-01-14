@@ -6,6 +6,11 @@ public class ParticleController : MonoBehaviour
 {
     private ParticleSystem particle;
 
+    private void Start()
+    {
+        
+    }
+
     public void ParticlePlay()
     {
         particle = GetComponent<ParticleSystem> ();
@@ -16,5 +21,10 @@ public class ParticleController : MonoBehaviour
     {
         particle = GetComponent<ParticleSystem>();
         particle.Stop();
+    }
+
+    private void OnParticleTrigger()
+    {
+        
     }
 }
