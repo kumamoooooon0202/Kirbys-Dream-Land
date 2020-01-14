@@ -13,12 +13,13 @@ GameObject:
   - component: {fileID: 6327916067226563775}
   - component: {fileID: 6327916067226563772}
   - component: {fileID: 6327916067226563770}
+  - component: {fileID: 2492790688180023574}
   - component: {fileID: 5132302983999352217}
   - component: {fileID: 1003134543098412587}
   - component: {fileID: 1931361078317776971}
   - component: {fileID: 1916644124887325875}
   - component: {fileID: 528818740064233991}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Player
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -151,6 +152,18 @@ MonoBehaviour:
   lastBG: {fileID: 0}
   mystatus: 1
   hoveringSpeed: 0
+--- !u!114 &2492790688180023574
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6327916067226563760}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a65ff4d815a219240a5b91c8eae1f0ae, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!70 &5132302983999352217
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -355,7 +368,7 @@ ParticleSystem:
     startSpeed:
       serializedVersion: 2
       minMaxState: 0
-      scalar: -5
+      scalar: -10
       minScalar: 5
       maxCurve:
         serializedVersion: 2
@@ -852,7 +865,7 @@ ParticleSystem:
     boxThickness: {x: 0, y: 0, z: 0}
     radiusThickness: 1
     donutRadius: 0.2
-    m_Position: {x: 1.5, y: 0, z: 0}
+    m_Position: {x: 1.81, y: 0, z: 0}
     m_Rotation: {x: 0, y: 30, z: 0}
     m_Scale: {x: 1, y: 1, z: 1}
     placementMode: 0
@@ -3743,8 +3756,8 @@ ParticleSystem:
   CollisionModule:
     enabled: 0
     serializedVersion: 3
-    type: 0
-    collisionMode: 0
+    type: 1
+    collisionMode: 1
     colliderForce: 0
     multiplyColliderForceByParticleSize: 0
     multiplyColliderForceByParticleSpeed: 0
@@ -3923,11 +3936,11 @@ ParticleSystem:
     maxCollisionShapes: 256
     quality: 0
     voxelSize: 0.5
-    collisionMessages: 0
+    collisionMessages: 1
     collidesWithDynamic: 1
     interiorCollisions: 0
   TriggerModule:
-    enabled: 0
+    enabled: 1
     collisionShape0: {fileID: 0}
     collisionShape1: {fileID: 0}
     collisionShape2: {fileID: 0}
@@ -4895,7 +4908,7 @@ ParticleSystemRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 0}
+  - {fileID: 10301, guid: 0000000000000000f000000000000000, type: 0}
   - {fileID: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
@@ -4935,7 +4948,7 @@ ParticleSystemRenderer:
   m_ApplyActiveColorSpace: 1
   m_AllowRoll: 1
   m_VertexStreams: 00010304
-  m_Mesh: {fileID: 0}
+  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
   m_Mesh1: {fileID: 0}
   m_Mesh2: {fileID: 0}
   m_Mesh3: {fileID: 0}

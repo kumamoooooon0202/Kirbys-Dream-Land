@@ -1,31 +1,66 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Player : Character
 {
     public static int life = 3;
     [SerializeField] private float hoveringSpeed;
     private bool hoveringFlag;
-
+    private ParticleSystem particle;
+    ParticleController parcon;
     void Start()
     {
         anim = GetComponent<Animator>();
         rb = GetComponent<Rigidbody2D>();
         mystatus = Status.normal;
         posDif = transform.position.x - farstBG.position.x;
+        particle = GetComponent<ParticleSystem>();
+        parcon = GetComponent<ParticleController>();
     }
 
     void Update()
     {
         if (Input.GetMouseButtonDown(0))
         {
-            HP -= 1;
+            Damege(1);
+        }
+
+        if (Input.GetKeyDown(KeyCode.KeypadEnter))
+        {
+            parcon.ParticlePlay();
         }
 
         if (Input.GetKey(KeyCode.KeypadEnter))
         {
             Attack();
+            if (myDirectionType == DirectionType.right)
+            {
+                //Ray ray = new Ray(transform.position, new Vector3(1, 0, 0));
+                //RaycastHit hit;
+                //int distance = 500;
+                //Debug.DrawLine(ray.origin, ray.direction * distance, Color.red);
+                //if (Physics.Raycast(ray, out hit, distance))
+                //{
+                //    if (hit.collider.tag == "Ground")
+                //    {
+                //        Debug.Log("ggg");
+                //    }
+                //}
+
+                Ray2D ray = new Ray2D(transform.position, new Vector2(1, 0));
+                RaycastHit2D hit = Physics2D.Raycast(ray.origin, ray.direction, 1f);
+                Debug.DrawLine(ray.origin, ray.direction, Color.red);
+                Debug.Log(hit.collider);
+            }
+            if (myDirectionType == DirectionType.left)
+            {
+                Ray2D ray = new Ray2D(transform.position, new Vector2(-1, 0));
+                RaycastHit2D hit = Physics2D.Raycast(ray.origin, ray.direction, 1f);
+                Debug.DrawLine(ray.origin, ray.direction, Color.red);
+                Debug.Log(hit.collider);
+            }
 
             // 攻撃をしている時は動けない為return
             return;
@@ -33,6 +68,7 @@ public class Player : Character
 
         if (Input.GetKeyUp(KeyCode.KeypadEnter))
         {
+            parcon.ParticleStop();
             anim.SetBool("AttackFlag", false);
         }
 

@@ -91,7 +91,6 @@ public class Character : MonoBehaviour
     public virtual void Jump()
     {
         rb.AddForce(Vector3.up * jumpSpeed);
-        //move_y += jumpSpeed;
     }
 
     /// <summary>
@@ -146,7 +145,7 @@ public class Character : MonoBehaviour
     /// <param name="power">ダメージ量</param>
     public void Damege(int power)
     {
-
+        HP = HP - power;
     }
 
     /// <summary>
@@ -155,7 +154,7 @@ public class Character : MonoBehaviour
     /// <param name="val">回復量</param>
     public void Recover(int val)
     {
-
+        HP = HP + val;
     }
 
     /// <summary>

@@ -67,6 +67,7 @@
     <Compile Include="Assets\Scripts\Character\Character.cs" />
     <Compile Include="Assets\Scripts\Character\Enemy.cs" />
     <Compile Include="Assets\Scripts\Character\Player.cs" />
+    <Compile Include="Assets\Scripts\Particle\ParticleController.cs" />
     <Compile Include="Assets\Scripts\Scene\DoorSceneChange.cs" />
     <Compile Include="Assets\Scripts\UI\CopyImageController.cs" />
     <Compile Include="Assets\Scripts\UI\HPUIController.cs" />
