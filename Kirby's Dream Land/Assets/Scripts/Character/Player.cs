@@ -10,7 +10,6 @@ public class Player : Character
     private bool hoveringFlag;
     private ParticleSystem particle;
     ParticleController parcon;
-
     void Start()
     {
         anim = GetComponent<Animator>();
@@ -19,6 +18,8 @@ public class Player : Character
         posDif = transform.position.x - farstBG.position.x;
         particle = GetComponent<ParticleSystem>();
         parcon = GetComponent<ParticleController>();
+        // 開幕はプログラム上、右を向いている為の処理
+        myDirectionType = DirectionType.right;
     }
 
     void Update()
@@ -26,9 +27,20 @@ public class Player : Character
         if (Input.GetMouseButtonDown(0))
         {
             Damege(1);
+            Debug.Log("1のダメージ！");
         }
 
-        if (Input.GetKeyDown(KeyCode.KeypadEnter))
+        if (Input.GetMouseButtonDown(1))
+        {
+            TextController.AddScore();
+        }
+
+        if (Input.GetMouseButtonDown(2))
+        {
+            TextController.DelLife();
+        }
+
+        if (Input.GetKeyDown(KeyCode.KeypadEnter) && mystatus == Status.normal)
         {
             parcon.ParticlePlay();
         }
@@ -38,6 +50,14 @@ public class Player : Character
             Attack();
             // 攻撃をしている時は動けない為return
             return;
+        }
+
+        // Enterキーを離すまで吸い込みをする
+        // Flagが立っている時
+        if (Input.GetKeyUp(KeyCode.KeypadEnter) && cheekFlag)
+        {
+            // 吸い込んだので膨らんでいる状態
+            mystatus = Status.cheek;
         }
 
         if (Input.GetKeyUp(KeyCode.KeypadEnter))
@@ -118,7 +138,7 @@ public class Player : Character
             anim.SetTrigger("FallFlag");
         }
 
-        Debug.Log(rb.velocity.y);
+        //Debug.Log(rb.velocity.y);
         #endregion
     }
 
@@ -135,6 +155,7 @@ public class Player : Character
     public override void Attack()
     {
         base.Attack();
+        rb.velocity = new Vector2(0, 0);
         anim.SetBool("AttackFlag", true);
     }
 

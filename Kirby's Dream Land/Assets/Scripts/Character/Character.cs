@@ -19,6 +19,8 @@ public class Character : MonoBehaviour
     [SerializeField] protected Transform farstBG;
     [SerializeField] protected Transform lastBG;
 
+    [SerializeField] private GameObject star;
+    protected bool cheekFlag = false;
 
     protected float move_x;
     protected float move_y;
@@ -30,6 +32,9 @@ public class Character : MonoBehaviour
     protected DirectionType myDirectionType;
     [SerializeField] protected Status mystatus;
 
+    /// <summary>
+    /// キャラクターの向いている方向
+    /// </summary>
     protected enum DirectionType
     {
         up,
@@ -38,6 +43,9 @@ public class Character : MonoBehaviour
         right,
     }
 
+    /// <summary>
+    /// キャラクターの状態
+    /// </summary>
     protected enum Status
     {
         enemy,
@@ -109,31 +117,18 @@ public class Character : MonoBehaviour
                 Debug.Log("吸い込み攻撃！");
                 if (myDirectionType == DirectionType.right)
                 {
-                    Vector3 pos = new Vector2(this.transform.position.x + 2.5f, transform.position.y);
-                    RaycastHit2D hit = Physics2D.Raycast(pos, new Vector2(1, 0), 1f);
-                    Debug.DrawLine(this.transform.position, pos, Color.red);
-                    if (hit.collider == null) { return; }
-                    if (hit.collider.tag == "Enemy")
-                    {
-                        Debug.Log(hit.collider);
-                    }
+                    Vacuum(1);
                 }
                 if (myDirectionType == DirectionType.left)
                 {
-                    Vector3 pos = new Vector2(this.transform.position.x - 2.5f, transform.position.y);
-                    RaycastHit2D hit = Physics2D.Raycast(pos, new Vector2(-1, 0), 1f);
-                    Debug.DrawLine(this.transform.position, pos, Color.red);
-                    if (hit.collider == null) { return; }
-                    if (hit.collider.tag == "Enemy")
-                    {
-                        Debug.Log(hit.collider);
-                    }
+                    Vacuum(-1);
                 }
                 break;
 
             // 頬張り
             case Status.cheek:
                 Debug.Log("吐き出し攻撃！");
+                SpittingAttack(1);
                 break;
 
             // ビーム
@@ -201,6 +196,38 @@ public class Character : MonoBehaviour
     }
 
     /// <summary>
+    /// 吸い込み攻撃
+    /// </summary>
+    /// <param name="direction">1:右 -1:左</param>
+    private void Vacuum(int direction)
+    {
+        Vector2 pos = new Vector2(this.transform.position.x + (direction * 2f), transform.position.y);
+        RaycastHit2D hit = Physics2D.Raycast(pos, new Vector2(direction * 1, 0), 1f);
+        Debug.DrawLine(this.transform.position, pos, Color.red);
+        if (hit.collider == null) { return; }
+        if (hit.collider.tag == "Enemy")
+        {
+            DeathEffectController.DeathEffect(hit.collider.transform.position);
+            Destroy(hit.collider.gameObject);
+            TextController.AddScore();
+            cheekFlag = true;
+        }
+    }
+
+    /// <summary>
+    /// 吐き出し攻撃
+    /// </summary>
+    /// <param name="direction">1:右 -1:左</param>
+    private void SpittingAttack(int direction)
+    {
+        // 吐き出し攻撃処理
+        Instantiate(star, this.transform.position, Quaternion.identity);
+        // 吐き出したのでノーマル状態に戻る
+        mystatus = Status.normal;
+        cheekFlag = false;
+    }
+
+    /// <summary>
     /// 接地判定
     /// </summary>
     /// <param name="collision"></param>
@@ -219,4 +246,5 @@ public class Character : MonoBehaviour
             groundFlag = false;
         }
     }
+
 }

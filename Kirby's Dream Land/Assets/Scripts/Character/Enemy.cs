@@ -6,7 +6,7 @@ public class Enemy : Character
 {
     void Start()
     {
-        HP = 1;
+        //HP = 1;
     }
 
     void Update()
