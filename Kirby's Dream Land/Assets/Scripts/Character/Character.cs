@@ -4,21 +4,13 @@ using UnityEngine;
 
 public class Character : MonoBehaviour
 {
-    protected static int HP = 6;
-    public static int CharacerHp()
-    {
-        return HP;
-    }
-    [SerializeField] protected int max_hp = 6;
     [SerializeField] protected float moveSpeed;
     [SerializeField] protected float jumpSpeed;
     [SerializeField] protected bool groundFlag;
     [SerializeField] protected bool attackFlag;
     [SerializeField] protected bool invincibleFlag;
-
     [SerializeField] protected Transform farstBG;
     [SerializeField] protected Transform lastBG;
-
     [SerializeField] private GameObject star;
     protected bool cheekFlag = false;
 
@@ -29,24 +21,25 @@ public class Character : MonoBehaviour
     protected Rigidbody2D rb;
     protected Animator anim;
 
-    protected DirectionType myDirectionType;
-    [SerializeField] protected Status mystatus;
+    public DirectionType myDirectionType;
+    protected int directionTypeNum = 0;
+    public Status mystatus;
 
     /// <summary>
     /// キャラクターの向いている方向
     /// </summary>
-    protected enum DirectionType
+    public enum DirectionType
     {
+        left = -1,
         up,
-        down,
-        left,
         right,
+        down,
     }
 
     /// <summary>
     /// キャラクターの状態
     /// </summary>
-    protected enum Status
+    public enum Status
     {
         enemy,
         normal,
@@ -115,14 +108,7 @@ public class Character : MonoBehaviour
             // 通常
             case Status.normal:
                 Debug.Log("吸い込み攻撃！");
-                if (myDirectionType == DirectionType.right)
-                {
-                    Vacuum(1);
-                }
-                if (myDirectionType == DirectionType.left)
-                {
-                    Vacuum(-1);
-                }
+                Vacuum(directionTypeNum);
                 break;
 
             // 頬張り
@@ -154,24 +140,6 @@ public class Character : MonoBehaviour
             default:
                 break;
         }
-    }
-
-    /// <summary>
-    /// ダメージ
-    /// </summary>
-    /// <param name="power">ダメージ量</param>
-    public void Damege(int power)
-    {
-        HP = HP - power;
-    }
-
-    /// <summary>
-    /// 回復
-    /// </summary>
-    /// <param name="val">回復量</param>
-    public void Recover(int val)
-    {
-        HP = HP + val;
     }
 
     /// <summary>

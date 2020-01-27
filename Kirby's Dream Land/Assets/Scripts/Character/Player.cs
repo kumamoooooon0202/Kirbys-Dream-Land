@@ -5,6 +5,12 @@ using UnityEngine.UI;
 
 public class Player : Character
 {
+    private static int HP = 0;
+    public static int CharacerHp()
+    {
+        return HP;
+    }
+    [SerializeField] protected int max_hp = 6;
     public static int life = 3;
     [SerializeField] private float hoveringSpeed;
     private bool hoveringFlag;
@@ -20,10 +26,15 @@ public class Player : Character
         parcon = GetComponent<ParticleController>();
         // 開幕はプログラム上、右を向いている為の処理
         myDirectionType = DirectionType.right;
+        HP = max_hp;
     }
 
     void Update()
     {
+        directionTypeNum = (int)myDirectionType;
+        Debug.Log(directionTypeNum);
+
+
         if (Input.GetMouseButtonDown(0))
         {
             Damege(1);
@@ -51,6 +62,9 @@ public class Player : Character
             // 攻撃をしている時は動けない為return
             return;
         }
+
+        // しゃがむ
+        Squat();
 
         // Enterキーを離すまで吸い込みをする
         // Flagが立っている時
@@ -90,17 +104,12 @@ public class Player : Character
         // 走る処理
         if (Input.GetKey(KeyCode.LeftShift) && Input.GetKey(KeyCode.A))
         {
-            Run(-1);
+            Run(directionTypeNum);
         }
 
         if (Input.GetKey(KeyCode.LeftShift) && Input.GetKey(KeyCode.D))
         {
-            Run(1);
-        }
-
-        if (groundFlag)
-        {
-            
+            Run(directionTypeNum);
         }
 
         var move = move_x * transform.right;
@@ -142,27 +151,79 @@ public class Player : Character
         #endregion
     }
 
+    /// <summary>
+    /// リスタート
+    /// </summary>
     private void ReStart()
     {
 
     }
 
+    /// <summary>
+    /// ゲームオーバー
+    /// </summary>
     private void GameOver()
     {
 
     }
 
+    /// <summary>
+    /// しゃがむ
+    /// </summary>
+    private void Squat()
+    {
+        if (Input.GetKey(KeyCode.S))
+        {
+            this.transform.localScale = new Vector3(directionTypeNum, 0.5f, 1);
+        }
+        else if (Input.GetKeyUp(KeyCode.S))
+        {
+            this.transform.localScale = new Vector3(directionTypeNum, 1, 1);
+        }
+    }
+
+    /// <summary>
+    /// 攻撃
+    /// </summary>
     public override void Attack()
     {
         base.Attack();
-        rb.velocity = new Vector2(0, 0);
+        rb.velocity = new Vector2(0, rb.velocity.y);
         anim.SetBool("AttackFlag", true);
     }
 
+    /// <summary>
+    /// ジャンプ
+    /// </summary>
     public override void Jump()
     {
         base.Jump();
         //if (groundFlag == false) { return; }
         anim.SetTrigger("jumpFlag");
+    }
+
+    /// <summary>
+    /// ダメージ
+    /// </summary>
+    /// <param name="power">ダメージ量</param>
+    public void Damege(int power)
+    {
+        HP = HP - power;
+    }
+
+    /// <summary>
+    /// 回復
+    /// </summary>
+    /// <param name="val">回復量</param>
+    public void Recover(int val)
+    {
+        if (max_hp <= HP + val)
+        {
+            HP = max_hp;
+        }
+        else
+        {
+            HP = HP + val;
+        }
     }
 }

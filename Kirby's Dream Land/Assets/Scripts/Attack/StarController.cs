@@ -4,18 +4,48 @@ using UnityEngine;
 
 public class StarController : MonoBehaviour
 {
-    private Transform transform;
-    private GameObject player;
+    private Transform myTransform;
+    private Character chara;
+    private Vector3 pos;
+    Character.DirectionType starDir;
+
     void Start()
     {
-        transform = GetComponent<Transform>();
-        player = GameObject.Find("Player");
+        myTransform = GetComponent<Transform>();
+        chara = FindObjectOfType<Character>();
+        pos = myTransform.localPosition;
+        starDir = chara.myDirectionType;
     }
 
     void Update()
     {
-        transform.Rotate(new Vector3(0, 0, -5));
-        Vector3 pos = this.gameObject.transform.position;
-        this.gameObject.transform.position = new Vector3(pos.x + 0.1f, player.transform.position.y, 0);
+        myTransform.Rotate(new Vector3(0, 0, -5));
+        pos = myTransform.position;
+        if (starDir == Character.DirectionType.left)
+        {
+            pos.x -= 0.1f;
+        }
+        if (starDir == Character.DirectionType.right)
+        {
+            pos.x += 0.1f;
+        }
+        if (!GetComponent<Renderer>().isVisible)
+        {
+            Destroy(gameObject);
+        }
+        myTransform.position = pos;
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        //if (collision.gameObject.tag == "Enemy")
+        //{
+        //    DeathEffectController.DeathEffect(collision.gameObject.transform.position);
+        //    Destroy(collision.gameObject);
+        //}
+        if (collision.gameObject.tag == "Ground")
+        {
+            Destroy(gameObject);
+        }
     }
 }

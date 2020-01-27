@@ -64,12 +64,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Scripts\Attack\StarController.cs" />
-    <Compile Include="Assets\Scripts\Camera\Camera.cs" />
+    <Compile Include="Assets\Scripts\Camera\CameraController.cs" />
     <Compile Include="Assets\Scripts\Character\Character.cs" />
     <Compile Include="Assets\Scripts\Character\Enemy.cs" />
     <Compile Include="Assets\Scripts\Character\Player.cs" />
     <Compile Include="Assets\Scripts\Effect\DeathEffectController.cs" />
     <Compile Include="Assets\Scripts\Effect\ParticleController.cs" />
+    <Compile Include="Assets\Scripts\Item\ItemController.cs" />
     <Compile Include="Assets\Scripts\Scene\DoorSceneChange.cs" />
     <Compile Include="Assets\Scripts\UI\CopyImageController.cs" />
     <Compile Include="Assets\Scripts\UI\HPUIController.cs" />

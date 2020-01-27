@@ -142,7 +142,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d4d840edec4dd24c975fb9974738684, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  max_hp: 6
   moveSpeed: 2
   jumpSpeed: 400
   groundFlag: 0
@@ -150,7 +149,10 @@ MonoBehaviour:
   invincibleFlag: 0
   farstBG: {fileID: 0}
   lastBG: {fileID: 0}
+  star: {fileID: 0}
+  myDirectionType: 0
   mystatus: 1
+  max_hp: 6
   hoveringSpeed: 0
 --- !u!114 &2492790688180023574
 MonoBehaviour:

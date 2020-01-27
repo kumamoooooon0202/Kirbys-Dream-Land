@@ -21,7 +21,7 @@ public class HPUIController : MonoBehaviour
 
     void Update()
     {
-        HP = Character.CharacerHp();
+        HP = Player.CharacerHp();
         Debug.Log("HP:" + HP);
 
         if (HP <= 0)
