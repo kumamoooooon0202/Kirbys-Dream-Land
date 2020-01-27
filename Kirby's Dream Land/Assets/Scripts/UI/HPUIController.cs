@@ -9,7 +9,7 @@ public class HPUIController : MonoBehaviour
     [SerializeField] private Sprite Hp;
     [SerializeField] private Sprite notHp;
 
-    private int HP;
+    private int playerHp;
 
     void Start()
     {
@@ -21,10 +21,9 @@ public class HPUIController : MonoBehaviour
 
     void Update()
     {
-        HP = Player.CharacerHp();
-        Debug.Log("HP:" + HP);
+        playerHp = FindObjectOfType<Player>().CharacerHp();
 
-        if (HP <= 0)
+        if (playerHp <= 0)
         {
             for (int i = 0; i < hpBox.Length; i++)
             {
@@ -32,12 +31,12 @@ public class HPUIController : MonoBehaviour
             }
             return;
         }
-        for (int i = 0; i < HP; i++)
+        for (int i = 0; i < playerHp; i++)
         {
             hpBox[i].GetComponent<Image>().sprite = Hp;
         }
 
-        for (int i = HP; i < hpBox.Length; i++)
+        for (int i = playerHp; i < hpBox.Length; i++)
         {
             hpBox[i].GetComponent<Image>().sprite = notHp;
         }

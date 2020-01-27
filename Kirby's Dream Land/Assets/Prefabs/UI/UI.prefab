@@ -211,7 +211,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 118591391408042397}
-  - component: {fileID: 2645175581800186406}
   - component: {fileID: 7540208215844417670}
   m_Layer: 0
   m_Name: UIController
@@ -234,24 +233,6 @@ Transform:
   m_Father: {fileID: 9052053610098065179}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2645175581800186406
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1587306729059380307}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 49b6607cd6b63424d967c760aa58ddb3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  nowStatus: {fileID: 0}
-  normal: {fileID: 0}
-  beam: {fileID: 0}
-  fire: {fileID: 0}
-  cutter: {fileID: 0}
-  sword: {fileID: 0}
 --- !u!114 &7540208215844417670
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -723,7 +704,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 49b6607cd6b63424d967c760aa58ddb3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  nowStatus: {fileID: 0}
   normal: {fileID: 0}
   beam: {fileID: 0}
   fire: {fileID: 0}
@@ -817,6 +797,7 @@ GameObject:
   - component: {fileID: 9052053609231291397}
   - component: {fileID: 9052053609231291399}
   - component: {fileID: 9052053609231291398}
+  - component: {fileID: 6731833705091708334}
   m_Layer: 5
   m_Name: NowStatus
   m_TagString: Untagged
@@ -879,6 +860,23 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &6731833705091708334
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9052053609231291396}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 49b6607cd6b63424d967c760aa58ddb3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  normal: {fileID: 21300000, guid: 5d787e318f2e0e94e8dee3fa417f6366, type: 3}
+  beam: {fileID: 21300000, guid: 5d787e318f2e0e94e8dee3fa417f6366, type: 3}
+  fire: {fileID: 21300000, guid: 5d787e318f2e0e94e8dee3fa417f6366, type: 3}
+  cutter: {fileID: 21300000, guid: 5d787e318f2e0e94e8dee3fa417f6366, type: 3}
+  sword: {fileID: 21300000, guid: 5d787e318f2e0e94e8dee3fa417f6366, type: 3}
 --- !u!1 &9052053609438812367
 GameObject:
   m_ObjectHideFlags: 0

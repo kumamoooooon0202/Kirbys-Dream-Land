@@ -5,13 +5,10 @@ using UnityEngine.UI;
 
 public class Player : Character
 {
-    private static int HP = 0;
-    public static int CharacerHp()
-    {
-        return HP;
-    }
+    private int hp = 0;
+    public int CharacerHp() { return hp; }
     [SerializeField] protected int max_hp = 6;
-    public static int life = 3;
+    public static int life = 0;
     [SerializeField] private float hoveringSpeed;
     private bool hoveringFlag;
     private ParticleSystem particle;
@@ -26,18 +23,17 @@ public class Player : Character
         parcon = GetComponent<ParticleController>();
         // 開幕はプログラム上、右を向いている為の処理
         myDirectionType = DirectionType.right;
-        HP = max_hp;
+        hp = max_hp;
     }
 
     void Update()
     {
         directionTypeNum = (int)myDirectionType;
-        Debug.Log(directionTypeNum);
 
 
         if (Input.GetMouseButtonDown(0))
         {
-            Damege(1);
+            Damege();
             Debug.Log("1のダメージ！");
         }
 
@@ -104,12 +100,12 @@ public class Player : Character
         // 走る処理
         if (Input.GetKey(KeyCode.LeftShift) && Input.GetKey(KeyCode.A))
         {
-            Run(directionTypeNum);
+            Run(-1);
         }
 
         if (Input.GetKey(KeyCode.LeftShift) && Input.GetKey(KeyCode.D))
         {
-            Run(directionTypeNum);
+            Run(1);
         }
 
         var move = move_x * transform.right;
@@ -206,9 +202,9 @@ public class Player : Character
     /// ダメージ
     /// </summary>
     /// <param name="power">ダメージ量</param>
-    public void Damege(int power)
+    public void Damege()
     {
-        HP = HP - power;
+        hp--;
     }
 
     /// <summary>
@@ -217,13 +213,13 @@ public class Player : Character
     /// <param name="val">回復量</param>
     public void Recover(int val)
     {
-        if (max_hp <= HP + val)
+        if (max_hp <= hp + val)
         {
-            HP = max_hp;
+            hp = max_hp;
         }
         else
         {
-            HP = HP + val;
+            hp = hp + val;
         }
     }
 }
