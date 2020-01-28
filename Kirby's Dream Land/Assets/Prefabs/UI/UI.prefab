@@ -705,6 +705,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   normal: {fileID: 0}
+  cheek: {fileID: 0}
   beam: {fileID: 0}
   fire: {fileID: 0}
   cutter: {fileID: 0}
@@ -872,11 +873,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 49b6607cd6b63424d967c760aa58ddb3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  normal: {fileID: 21300000, guid: 5d787e318f2e0e94e8dee3fa417f6366, type: 3}
-  beam: {fileID: 21300000, guid: 5d787e318f2e0e94e8dee3fa417f6366, type: 3}
-  fire: {fileID: 21300000, guid: 5d787e318f2e0e94e8dee3fa417f6366, type: 3}
-  cutter: {fileID: 21300000, guid: 5d787e318f2e0e94e8dee3fa417f6366, type: 3}
-  sword: {fileID: 21300000, guid: 5d787e318f2e0e94e8dee3fa417f6366, type: 3}
+  normal: {fileID: 21300000, guid: 243ed8a846d62d145a983423c68b529d, type: 3}
+  cheek: {fileID: 21300000, guid: 4a99a7bf468cf3147af0f6fdaf54e4b3, type: 3}
+  beam: {fileID: 21300000, guid: 243ed8a846d62d145a983423c68b529d, type: 3}
+  fire: {fileID: 21300000, guid: 243ed8a846d62d145a983423c68b529d, type: 3}
+  cutter: {fileID: 21300000, guid: 243ed8a846d62d145a983423c68b529d, type: 3}
+  sword: {fileID: 21300000, guid: 243ed8a846d62d145a983423c68b529d, type: 3}
 --- !u!1 &9052053609438812367
 GameObject:
   m_ObjectHideFlags: 0

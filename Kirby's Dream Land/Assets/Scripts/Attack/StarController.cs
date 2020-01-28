@@ -5,16 +5,16 @@ using UnityEngine;
 public class StarController : MonoBehaviour
 {
     private Transform myTransform;
-    private Character chara;
+    private GameObject chara;
     private Vector3 pos;
     Character.DirectionType starDir;
 
     void Start()
     {
         myTransform = GetComponent<Transform>();
-        chara = FindObjectOfType<Character>();
+        chara = GameObject.Find("Player");
         pos = myTransform.localPosition;
-        starDir = chara.myDirectionType;
+        starDir = chara.GetComponent<Player>().myDirectionType;
     }
 
     void Update()
@@ -36,6 +36,10 @@ public class StarController : MonoBehaviour
         myTransform.position = pos;
     }
 
+    /// <summary>
+    /// 床、壁に触れたら消える
+    /// </summary>
+    /// <param name="collision"></param>
     private void OnTriggerEnter2D(Collider2D collision)
     {
         //if (collision.gameObject.tag == "Enemy")

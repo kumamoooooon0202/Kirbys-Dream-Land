@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class Player : Character
 {
@@ -10,9 +11,18 @@ public class Player : Character
     [SerializeField] protected int max_hp = 6;
     public static int life = 0;
     [SerializeField] private float hoveringSpeed;
-    private bool hoveringFlag;
+    private bool hoveringFlag = false;
+    [SerializeField] private float invisibleTime;
+    private float maxInvisibleTime;
+    public bool InvisibleFlag
+    {
+        get { return invincibleFlag; }
+        set { invincibleFlag = value; }
+    }
+    [SerializeField] private float time;
     private ParticleSystem particle;
     ParticleController parcon;
+    SpriteRenderer sprite;
     void Start()
     {
         anim = GetComponent<Animator>();
@@ -24,53 +34,41 @@ public class Player : Character
         // 開幕はプログラム上、右を向いている為の処理
         myDirectionType = DirectionType.right;
         hp = max_hp;
+        maxInvisibleTime = invisibleTime;
+        sprite = GetComponent<SpriteRenderer>();
     }
 
     void Update()
     {
+        GameOver();     // ゲームオーバー
+        Invincible();   // 無敵時間
+        FallDeath();    // 落下死判定
+        Squat();        // しゃがむ
+
         directionTypeNum = (int)myDirectionType;
 
-
-        if (Input.GetMouseButtonDown(0))
-        {
-            Damege();
-            Debug.Log("1のダメージ！");
-        }
-
-        if (Input.GetMouseButtonDown(1))
-        {
-            TextController.AddScore();
-        }
-
-        if (Input.GetMouseButtonDown(2))
-        {
-            TextController.DelLife();
-        }
-
-        if (Input.GetKeyDown(KeyCode.KeypadEnter) && mystatus == Status.normal)
+        if (Input.GetKeyDown(KeyCode.Return) && mystatus == Status.normal)
         {
             parcon.ParticlePlay();
         }
 
-        if (Input.GetKey(KeyCode.KeypadEnter))
+        if (Input.GetKey(KeyCode.Return))
         {
             Attack();
             // 攻撃をしている時は動けない為return
             return;
         }
 
-        // しゃがむ
-        Squat();
 
         // Enterキーを離すまで吸い込みをする
         // Flagが立っている時
-        if (Input.GetKeyUp(KeyCode.KeypadEnter) && cheekFlag)
+        if (Input.GetKeyUp(KeyCode.Return) && cheekFlag)
         {
             // 吸い込んだので膨らんでいる状態
             mystatus = Status.cheek;
         }
 
-        if (Input.GetKeyUp(KeyCode.KeypadEnter))
+        if (Input.GetKeyUp(KeyCode.Return))
         {
             parcon.ParticleStop();
             anim.SetBool("AttackFlag", false);
@@ -160,7 +158,23 @@ public class Player : Character
     /// </summary>
     private void GameOver()
     {
+        if (hp == 0 && life == 0 || life < 0)
+        {
+            SceneManager.LoadScene("GameOverScene");
+        }
+    }
 
+    /// <summary>
+    /// 落下死判定
+    /// </summary>
+    private void FallDeath()
+    {
+        if (gameObject.transform.position.y <= -4)
+        {
+            life--;
+            // リスタートの処理追加
+            // 死亡アニメーション追加予定
+        }
     }
 
     /// <summary>
@@ -168,6 +182,7 @@ public class Player : Character
     /// </summary>
     private void Squat()
     {
+        // スライディングの追加
         if (Input.GetKey(KeyCode.S))
         {
             this.transform.localScale = new Vector3(directionTypeNum, 0.5f, 1);
@@ -220,6 +235,49 @@ public class Player : Character
         else
         {
             hp = hp + val;
+        }
+    }
+
+    /// <summary>
+    /// 無敵
+    /// </summary>
+    public void Invincible()
+    {
+        if (invincibleFlag)
+        {
+            sprite.color = GetAlphaColor(sprite.color);
+            invisibleTime -= Time.deltaTime;
+            if (invisibleTime <= 0)
+            {
+                invincibleFlag = false;
+                invisibleTime = maxInvisibleTime;
+                sprite.color = new Color(1, 1, 1, 1);
+            }
+        }
+    }
+
+    /// <summary>
+    /// キャラの点滅
+    /// </summary>
+    /// <param name="color"></param>
+    /// <returns></returns>
+    private Color GetAlphaColor(Color color)
+    {
+        time += Time.deltaTime * 15.0f;
+        color.a = Mathf.Sin(time) * 0.5f + 0.5f;
+        return color;
+    }
+
+    /// <summary>
+    /// 敵に触れたらダメージ&無敵時間
+    /// </summary>
+    /// <param name="collision"></param>
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.tag == "Enemy" && invincibleFlag == false)
+        {
+            Damege();
+            invincibleFlag = true;
         }
     }
 }

@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Character : MonoBehaviour
 {
+    #region 変数
     [SerializeField] protected float moveSpeed;
     [SerializeField] protected float jumpSpeed;
     [SerializeField] protected bool groundFlag;
@@ -24,6 +25,7 @@ public class Character : MonoBehaviour
     public DirectionType myDirectionType;
     protected int directionTypeNum = 0;
     public Status mystatus;
+    #endregion
 
     /// <summary>
     /// キャラクターの向いている方向
@@ -199,7 +201,7 @@ public class Character : MonoBehaviour
     /// 接地判定
     /// </summary>
     /// <param name="collision"></param>
-    private void OnTriggerEnter2D(Collider2D collision)
+    private void OnTriggerStay2D(Collider2D collision)
     {
         if (collision.gameObject.tag == "Ground")
         {

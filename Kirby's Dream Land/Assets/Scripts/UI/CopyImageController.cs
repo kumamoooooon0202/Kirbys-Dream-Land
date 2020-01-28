@@ -7,6 +7,7 @@ public class CopyImageController : MonoBehaviour
 {
     private Image nowStatus;
     [SerializeField] private Sprite normal;
+    [SerializeField] private Sprite cheek;
     [SerializeField] private Sprite beam;
     [SerializeField] private Sprite fire;
     [SerializeField] private Sprite cutter;
@@ -26,6 +27,10 @@ public class CopyImageController : MonoBehaviour
         {
             case Character.Status.normal:
                 nowStatus.sprite = normal;
+                break;
+
+            case Character.Status.cheek:
+                nowStatus.sprite = cheek;
                 break;
 
             case Character.Status.beam:

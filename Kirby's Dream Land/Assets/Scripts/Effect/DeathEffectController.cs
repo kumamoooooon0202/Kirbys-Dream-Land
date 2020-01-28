@@ -13,11 +13,6 @@ public class DeathEffectController : MonoBehaviour
         transform = GetComponent<Transform>();
     }
 
-    void Update()
-    {
-        
-    }
-
     public static void DeathEffect(Vector3 pos)
     {
         transform.position = pos;

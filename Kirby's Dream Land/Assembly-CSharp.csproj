@@ -64,6 +64,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Scripts\Attack\StarController.cs" />
+    <Compile Include="Assets\Scripts\Audio\PlayerAudioController.cs" />
     <Compile Include="Assets\Scripts\Camera\CameraController.cs" />
     <Compile Include="Assets\Scripts\Character\Character.cs" />
     <Compile Include="Assets\Scripts\Character\Enemy.cs" />
@@ -71,9 +72,12 @@
     <Compile Include="Assets\Scripts\Effect\DeathEffectController.cs" />
     <Compile Include="Assets\Scripts\Effect\ParticleController.cs" />
     <Compile Include="Assets\Scripts\Item\ItemController.cs" />
-    <Compile Include="Assets\Scripts\Scene\DoorSceneChange.cs" />
+    <Compile Include="Assets\Scripts\Scene\GameSceneChange.cs" />
+    <Compile Include="Assets\Scripts\Scene\NextSceneChange.cs" />
+    <Compile Include="Assets\Scripts\Scene\TitleSceneChange.cs" />
     <Compile Include="Assets\Scripts\UI\CopyImageController.cs" />
     <Compile Include="Assets\Scripts\UI\HPUIController.cs" />
+    <Compile Include="Assets\Scripts\UI\TextColorChange.cs" />
     <Compile Include="Assets\Scripts\UI\TextController.cs" />
     <None Include="Assets\Resources\Sprite\BayatGames\Free Platform Game Assets\Readme.txt" />
     <Reference Include="Unity.Timeline.Editor">

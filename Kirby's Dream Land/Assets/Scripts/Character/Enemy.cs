@@ -11,17 +11,18 @@ public class Enemy : Character
         player = FindObjectOfType<Player>();
     }
 
-    void Update()
-    {
-        
-    }
-
-
+    /// <summary>
+    /// 敵の死
+    /// </summary>
     public void DeathEnemy()
     {
         this.gameObject.SetActive(false);
     }
 
+    /// <summary>
+    /// 敵の当たり判定処理
+    /// </summary>
+    /// <param name="collision"></param>
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.tag == "Star" || collision.gameObject.tag == "Player")
@@ -29,10 +30,6 @@ public class Enemy : Character
             DeathEffectController.DeathEffect(gameObject.transform.position);
             Destroy(gameObject);
             TextController.AddScore();
-        }
-        if (collision.gameObject.tag == "Player")
-        {
-            player.Damege();
         }
     }
 }
