@@ -5,10 +5,12 @@ using UnityEngine;
 public class Enemy : Character
 {
     private Player player;
+    private EnemyAudio enemyAudio;
 
     void Start()
     {
         player = FindObjectOfType<Player>();
+        enemyAudio = GetComponent<EnemyAudio>();
     }
 
     /// <summary>
@@ -16,7 +18,11 @@ public class Enemy : Character
     /// </summary>
     public void DeathEnemy()
     {
-        this.gameObject.SetActive(false);
+        DeathEffectController.DeathEffect(gameObject.transform.position);
+        enemyAudio.DamegeAudio();
+        gameObject.SetActive(false);
+        //Destroy(gameObject);
+        TextController.AddScore();
     }
 
     /// <summary>
@@ -27,9 +33,7 @@ public class Enemy : Character
     {
         if (collision.gameObject.tag == "Star" || collision.gameObject.tag == "Player")
         {
-            DeathEffectController.DeathEffect(gameObject.transform.position);
-            Destroy(gameObject);
-            TextController.AddScore();
+            DeathEnemy();
         }
     }
 }

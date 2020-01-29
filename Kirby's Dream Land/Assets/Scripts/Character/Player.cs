@@ -23,7 +23,7 @@ public class Player : Character
     private ParticleSystem particle;
     private ParticleController parcon;
     private SpriteRenderer sprite;
-    private PlayerAudioController plAudio;
+    private PlayerAudio plAudio;
 
     void Start()
     {
@@ -38,7 +38,7 @@ public class Player : Character
         hp = max_hp;
         maxInvisibleTime = invisibleTime;
         sprite = GetComponent<SpriteRenderer>();
-        plAudio = GetComponent<PlayerAudioController>();
+        plAudio = GetComponent<PlayerAudio>();
     }
 
     void Update()

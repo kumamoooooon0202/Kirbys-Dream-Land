@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerAudioController : MonoBehaviour
+public class PlayerAudio : MonoBehaviour
 {
     [SerializeField] private AudioClip jump;        // ジャンプ
     [SerializeField] private AudioClip hovering;    // ホバリング
@@ -60,6 +60,7 @@ public class PlayerAudioController : MonoBehaviour
                 audioSource.clip = sword;
                 break;
         }
+        if (audioSource.clip == null) return;
         audioSource.Play();
     }
 

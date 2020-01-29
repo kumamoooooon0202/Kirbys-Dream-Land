@@ -19,8 +19,8 @@ GameObject:
   - component: {fileID: 1931361078317776971}
   - component: {fileID: 1916644124887325875}
   - component: {fileID: 528818740064233991}
-  - component: {fileID: 3368427603473714724}
-  - component: {fileID: 887592063418272053}
+  - component: {fileID: 7782100862233292348}
+  - component: {fileID: 857178921035633863}
   m_Layer: 8
   m_Name: Player
   m_TagString: Player
@@ -4959,7 +4959,7 @@ ParticleSystemRenderer:
   m_Mesh2: {fileID: 0}
   m_Mesh3: {fileID: 0}
   m_MaskInteraction: 0
---- !u!82 &3368427603473714724
+--- !u!82 &7782100862233292348
 AudioSource:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -5055,7 +5055,7 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!114 &887592063418272053
+--- !u!114 &857178921035633863
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -5064,14 +5064,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 6327916067226563760}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e7538c76992dfea418916215af1afa44, type: 3}
+  m_Script: {fileID: 11500000, guid: 805ff61e82a2f874991b379e58e28d4c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   jump: {fileID: 0}
   hovering: {fileID: 0}
   landing: {fileID: 0}
   run: {fileID: 0}
-  damege: {fileID: 8300000, guid: a3be2c5ef7075b043873a2f8e68e9bd7, type: 3}
+  damege: {fileID: 8300000, guid: 484d4f245813f944bb3f1ae85227a971, type: 3}
   vacuum: {fileID: 8300000, guid: fb5ce7e443b132f4a9da978d5e6b0529, type: 3}
   spitting: {fileID: 0}
   beam: {fileID: 0}
