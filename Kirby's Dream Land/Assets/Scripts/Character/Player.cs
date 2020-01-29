@@ -21,8 +21,10 @@ public class Player : Character
     }
     [SerializeField] private float time;
     private ParticleSystem particle;
-    ParticleController parcon;
-    SpriteRenderer sprite;
+    private ParticleController parcon;
+    private SpriteRenderer sprite;
+    private PlayerAudioController plAudio;
+
     void Start()
     {
         anim = GetComponent<Animator>();
@@ -36,6 +38,7 @@ public class Player : Character
         hp = max_hp;
         maxInvisibleTime = invisibleTime;
         sprite = GetComponent<SpriteRenderer>();
+        plAudio = GetComponent<PlayerAudioController>();
     }
 
     void Update()
@@ -52,13 +55,17 @@ public class Player : Character
             parcon.ParticlePlay();
         }
 
+        if (Input.GetKeyDown(KeyCode.Return))
+        {
+            plAudio.ChangeAttackAudio(mystatus);
+        }
+
         if (Input.GetKey(KeyCode.Return))
         {
             Attack();
             // 攻撃をしている時は動けない為return
             return;
         }
-
 
         // Enterキーを離すまで吸い込みをする
         // Flagが立っている時
@@ -72,6 +79,7 @@ public class Player : Character
         {
             parcon.ParticleStop();
             anim.SetBool("AttackFlag", false);
+            plAudio.AudioStop();
         }
 
         #region 移動処理
@@ -220,6 +228,7 @@ public class Player : Character
     public void Damege()
     {
         hp--;
+        plAudio.DamegeAusio();
     }
 
     /// <summary>

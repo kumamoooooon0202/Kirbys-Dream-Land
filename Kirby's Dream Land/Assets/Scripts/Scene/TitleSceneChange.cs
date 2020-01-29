@@ -7,7 +7,7 @@ public class TitleSceneChange : MonoBehaviour
 {
     void Update()
     {
-        if (Input.anyKeyDown)
+        if (Input.GetKeyDown(KeyCode.Return))
         {
             SceneManager.LoadScene("TitleScene");
         }

@@ -20,6 +20,7 @@ GameObject:
   - component: {fileID: 1916644124887325875}
   - component: {fileID: 528818740064233991}
   - component: {fileID: 3368427603473714724}
+  - component: {fileID: 887592063418272053}
   m_Layer: 8
   m_Name: Player
   m_TagString: Player
@@ -156,7 +157,7 @@ MonoBehaviour:
   max_hp: 6
   hoveringSpeed: 0
   invisibleTime: 1
-  time: 5
+  time: 1
 --- !u!114 &2492790688180023574
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5054,3 +5055,26 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &887592063418272053
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6327916067226563760}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e7538c76992dfea418916215af1afa44, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  jump: {fileID: 0}
+  hovering: {fileID: 0}
+  landing: {fileID: 0}
+  run: {fileID: 0}
+  damege: {fileID: 8300000, guid: a3be2c5ef7075b043873a2f8e68e9bd7, type: 3}
+  vacuum: {fileID: 8300000, guid: fb5ce7e443b132f4a9da978d5e6b0529, type: 3}
+  spitting: {fileID: 0}
+  beam: {fileID: 0}
+  fire: {fileID: 0}
+  cutter: {fileID: 0}
+  sword: {fileID: 0}

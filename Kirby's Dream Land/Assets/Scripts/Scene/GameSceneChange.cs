@@ -7,7 +7,7 @@ public class GameSceneChange : MonoBehaviour
 {
     void Update()
     {
-        if (Input.anyKeyDown)
+        if (Input.GetKeyDown(KeyCode.Space))
         {
             SceneManager.LoadScene("GameScene1-1");
         }
