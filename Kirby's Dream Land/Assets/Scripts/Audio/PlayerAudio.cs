@@ -61,6 +61,7 @@ public class PlayerAudio : MonoBehaviour
                 break;
         }
         if (audioSource.clip == null) return;
+        // Audioの再生
         audioSource.Play();
     }
 

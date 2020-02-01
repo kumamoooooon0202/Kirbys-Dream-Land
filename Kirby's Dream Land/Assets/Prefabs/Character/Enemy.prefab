@@ -197,8 +197,11 @@ MonoBehaviour:
   farstBG: {fileID: 0}
   lastBG: {fileID: 0}
   star: {fileID: 0}
+  fat: 1
   myDirectionType: 0
   mystatus: 0
+  enemyStatus: 1
+  myEnemyStatus: 1
 --- !u!82 &2289893896506444517
 AudioSource:
   m_ObjectHideFlags: 0

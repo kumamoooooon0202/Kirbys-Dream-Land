@@ -46,43 +46,13 @@ public class Player : Character
         GameOver();     // ゲームオーバー
         Invincible();   // 無敵時間
         FallDeath();    // 落下死判定
-        Squat();        // しゃがむ
 
         directionTypeNum = (int)myDirectionType;
 
-        if (Input.GetKeyDown(KeyCode.Return) && mystatus == Status.normal)
-        {
-            parcon.ParticlePlay();
-        }
-
-        if (Input.GetKeyDown(KeyCode.Return))
-        {
-            plAudio.ChangeAttackAudio(mystatus);
-        }
-
-        if (Input.GetKey(KeyCode.Return))
-        {
-            Attack();
-            // 攻撃をしている時は動けない為return
-            return;
-        }
-
-        // Enterキーを離すまで吸い込みをする
-        // Flagが立っている時
-        if (Input.GetKeyUp(KeyCode.Return) && cheekFlag)
-        {
-            // 吸い込んだので膨らんでいる状態
-            mystatus = Status.cheek;
-        }
-
-        if (Input.GetKeyUp(KeyCode.Return))
-        {
-            parcon.ParticleStop();
-            anim.SetBool("AttackFlag", false);
-            plAudio.AudioStop();
-        }
+        InputInfo();    // Input関連
 
         #region 移動処理
+        Squat();        // しゃがむ
         move_x = 0f;
         move_y = 0f;
         // ジャンプの処理
@@ -154,6 +124,49 @@ public class Player : Character
     }
 
     /// <summary>
+    /// Input関連
+    /// </summary>
+    private void InputInfo()
+    {
+        // Nomalかつ攻撃キーを押した時
+        if (Input.GetKeyDown(KeyCode.Return) && mystatus == Status.normal)
+        {
+            // 吸い込みエフェクト
+            parcon.ParticlePlay();
+        }
+
+        if (Input.GetKeyDown(KeyCode.Return))
+        {
+            // Audioの切り替え
+            plAudio.ChangeAttackAudio(mystatus);
+        }
+
+        if (Input.GetKey(KeyCode.Return))
+        {
+            Attack();
+            // 攻撃をしている時は動けない為return
+            return;
+        }
+
+        // Enterキーを離すまで吸い込みをする
+        // Flagが立っている時
+        if (Input.GetKeyUp(KeyCode.Return) && cheekFlag)
+        {
+            // 吸い込んだので膨らんでいる状態
+            mystatus = Status.cheek;
+            FatJudg(1.5f);
+        }
+
+        // 攻撃キーを離した時
+        if (Input.GetKeyUp(KeyCode.Return))
+        {
+            parcon.ParticleStop();
+            anim.SetBool("AttackFlag", false);
+            plAudio.AudioStop();
+        }
+    }
+
+    /// <summary>
     /// リスタート
     /// </summary>
     private void ReStart()
@@ -190,10 +203,14 @@ public class Player : Character
     /// </summary>
     private void Squat()
     {
-        // スライディングの追加
-        if (Input.GetKey(KeyCode.S))
+        // スライディングの追加したい
+        if (Input.GetKey(KeyCode.S) && enemyStatus == Enemy.EnemyStatus.empty)
         {
             this.transform.localScale = new Vector3(directionTypeNum, 0.5f, 1);
+        }
+        else if (Input.GetKey(KeyCode.S) && enemyStatus != Enemy.EnemyStatus.empty)
+        {
+            Swallow();
         }
         else if (Input.GetKeyUp(KeyCode.S))
         {

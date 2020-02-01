@@ -5073,7 +5073,7 @@ MonoBehaviour:
   run: {fileID: 0}
   damege: {fileID: 8300000, guid: 484d4f245813f944bb3f1ae85227a971, type: 3}
   vacuum: {fileID: 8300000, guid: fb5ce7e443b132f4a9da978d5e6b0529, type: 3}
-  spitting: {fileID: 0}
+  spitting: {fileID: 8300000, guid: bc6c1bcaab9b18b45aa28ce1bed594c5, type: 3}
   beam: {fileID: 0}
   fire: {fileID: 0}
   cutter: {fileID: 0}

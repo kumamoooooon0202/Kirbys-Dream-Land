@@ -6,6 +6,17 @@ public class Enemy : Character
 {
     private Player player;
     private EnemyAudio enemyAudio;
+    public EnemyStatus myEnemyStatus;
+
+    public enum EnemyStatus
+    {
+        empty,
+        nomal,
+        beam,
+        fire,
+        cutter,
+        sword
+    }
 
     void Start()
     {
