@@ -15,6 +15,7 @@ public class PlayerAudio : MonoBehaviour
     [SerializeField] private AudioClip fire;        // ファイア
     [SerializeField] private AudioClip cutter;      // カッター
     [SerializeField] private AudioClip sword;       // ソード
+    [SerializeField] private AudioClip death;       // 死亡
 
     private AudioSource audioSource;
 
@@ -65,6 +66,9 @@ public class PlayerAudio : MonoBehaviour
         audioSource.Play();
     }
 
+    /// <summary>
+    /// ダメージ音
+    /// </summary>
     public void DamegeAusio()
     {
         audioSource.clip = damege;
@@ -77,5 +81,14 @@ public class PlayerAudio : MonoBehaviour
     public void AudioStop()
     {
         audioSource.Stop();
+    }
+
+    /// <summary>
+    /// 死亡音
+    /// </summary>
+    public void DeathAudio()
+    {
+        audioSource.clip = death;
+        audioSource.Play();
     }
 }

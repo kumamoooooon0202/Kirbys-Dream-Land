@@ -5070,3 +5070,4 @@ MonoBehaviour:
   fire: {fileID: 0}
   cutter: {fileID: 0}
   sword: {fileID: 0}
+  death: {fileID: 8300000, guid: aa48417117fb8144eb15aee8efbc7c35, type: 3}

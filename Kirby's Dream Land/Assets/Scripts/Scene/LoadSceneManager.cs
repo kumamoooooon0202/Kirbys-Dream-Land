@@ -12,13 +12,17 @@ public class LoadSceneManager : MonoBehaviour
     void Start()
     {
         loadScene = SceneManager.GetActiveScene();
-        player = GetComponent<Player>();
+        player = FindObjectOfType<Player>();
         playerHp = player.CharacerHp();
     }
 
     void Update()
     {
-        
+        if (player.DeathFlag && player.transform.position.y <= -14)
+        {
+            GameOver();
+            ReStart();
+        }
     }
 
     /// <summary>
@@ -30,6 +34,7 @@ public class LoadSceneManager : MonoBehaviour
         {
             // Fadeinとか使いたい
             SceneManager.LoadScene(loadScene.name);
+            Player.life--;
         }
     }
 

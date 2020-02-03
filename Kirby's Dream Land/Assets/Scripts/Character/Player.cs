@@ -9,7 +9,7 @@ public class Player : Character
     private int hp = 0;
     public int CharacerHp() { return hp; }
     [SerializeField] protected int max_hp = 6;
-    public static int life = 0;
+    public static int life = 1;
     [SerializeField] private float hoveringSpeed;
     private bool hoveringFlag = false;
     [SerializeField] private float invisibleTime;
@@ -24,7 +24,13 @@ public class Player : Character
     private ParticleController parcon;
     private SpriteRenderer sprite;
     private PlayerAudio plAudio;
+    [SerializeField] private bool squatFlag;
     private bool deathFlag = false;
+    public bool DeathFlag
+    {
+        get { return deathFlag; }
+        set { deathFlag = value; }
+    }
 
     void Start()
     {
@@ -44,14 +50,17 @@ public class Player : Character
 
     void Update()
     {
-        GameOver();     // ゲームオーバー
-        FallDeath();    // 落下死判定
-        if (deathFlag) return;
-        if (Input.GetKeyDown(KeyCode.P))
+        if (Input.GetMouseButtonDown(0))
         {
-            DeathPlayerAnimation();
+            hp--;
         }
-        Invincible();   // 無敵時間
+        FallDeath();                            // 落下死判定
+        if (hp <= 0 && deathFlag == false)
+        {
+            DeathPlayerAnimation();             // 死亡アニメーション
+        }
+        if (deathFlag) return;
+        Invincible();                           // 無敵時間
 
         directionTypeNum = (int)myDirectionType;
 
@@ -71,9 +80,12 @@ public class Player : Character
 
         if (Input.GetKey(KeyCode.Return))
         {
-            Attack();
-            // 攻撃をしている時は動けない為return
-            return;
+            if (squatFlag == false)
+            {
+                Attack();
+                // 攻撃をしている時は動けない為return
+                return;
+            }
         }
 
         // Enterキーを離すまで吸い込みをする
@@ -95,7 +107,7 @@ public class Player : Character
         #endregion
 
         #region 移動処理
-        Squat();        // しゃがむ
+        Squat();
         move_x = 0f;
         move_y = 0f;
         // ジャンプの処理
@@ -171,6 +183,7 @@ public class Player : Character
     /// </summary>
     private void DeathPlayerAnimation()
     {
+        plAudio.DeathAudio();
         anim.Play("DeathAnimation");
         rb.velocity = new Vector2(0, 0);
         deathFlag = true;
@@ -184,35 +197,15 @@ public class Player : Character
     }
 
     /// <summary>
-    /// リスタート
-    /// </summary>
-    private void ReStart()
-    {
-
-    }
-
-    /// <summary>
-    /// ゲームオーバー
-    /// </summary>
-    private void GameOver()
-    {
-        if (hp == 0 && life == 0 || life < 0)
-        {
-            DeathPlayerAnimation();
-            SceneManager.LoadScene("GameOverScene");
-        }
-    }
-
-    /// <summary>
     /// 落下死判定
     /// </summary>
     private void FallDeath()
     {
-        if (gameObject.transform.position.y <= -4)
+        if (deathFlag == false && gameObject.transform.position.y <= -4)
         {
-            life--;
-            // リスタートの処理追加
-            // 死亡アニメーション追加予定
+            DeathPlayerAnimation();
+            return;
+
         }
     }
 
@@ -224,6 +217,7 @@ public class Player : Character
         // スライディングの追加したい
         if (Input.GetKey(KeyCode.S) && enemyStatus == Enemy.EnemyStatus.empty)
         {
+            squatFlag = true;
             this.transform.localScale = new Vector3(directionTypeNum, 0.5f, 1);
         }
         else if (Input.GetKey(KeyCode.S) && enemyStatus != Enemy.EnemyStatus.empty)
@@ -232,6 +226,7 @@ public class Player : Character
         }
         else if (Input.GetKeyUp(KeyCode.S))
         {
+            squatFlag = false;
             this.transform.localScale = new Vector3(directionTypeNum, 1, 1);
         }
     }

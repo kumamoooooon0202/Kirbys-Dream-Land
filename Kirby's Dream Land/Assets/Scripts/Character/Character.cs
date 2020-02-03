@@ -48,6 +48,7 @@ public class Character : MonoBehaviour
     {
         enemy,
         normal,
+        squat,
         cheek,
         beam,
         fire,
