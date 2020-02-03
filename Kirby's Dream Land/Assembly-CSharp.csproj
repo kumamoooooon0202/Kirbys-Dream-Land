@@ -74,6 +74,7 @@
     <Compile Include="Assets\Scripts\Effect\ParticleController.cs" />
     <Compile Include="Assets\Scripts\Item\ItemController.cs" />
     <Compile Include="Assets\Scripts\Scene\GameSceneChange.cs" />
+    <Compile Include="Assets\Scripts\Scene\LoadSceneManager.cs" />
     <Compile Include="Assets\Scripts\Scene\NextSceneChange.cs" />
     <Compile Include="Assets\Scripts\Scene\TitleSceneChange.cs" />
     <Compile Include="Assets\Scripts\UI\CopyImageController.cs" />

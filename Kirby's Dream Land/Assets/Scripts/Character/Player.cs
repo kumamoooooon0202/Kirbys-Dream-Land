@@ -24,6 +24,7 @@ public class Player : Character
     private ParticleController parcon;
     private SpriteRenderer sprite;
     private PlayerAudio plAudio;
+    private bool deathFlag = false;
 
     void Start()
     {
@@ -44,12 +45,54 @@ public class Player : Character
     void Update()
     {
         GameOver();     // ゲームオーバー
-        Invincible();   // 無敵時間
         FallDeath();    // 落下死判定
+        if (deathFlag) return;
+        if (Input.GetKeyDown(KeyCode.P))
+        {
+            DeathPlayerAnimation();
+        }
+        Invincible();   // 無敵時間
 
         directionTypeNum = (int)myDirectionType;
 
-        InputInfo();    // Input関連
+        #region Input
+        // Nomalかつ攻撃キーを押した時
+        if (Input.GetKeyDown(KeyCode.Return) && mystatus == Status.normal)
+        {
+            // 吸い込みエフェクト
+            parcon.ParticlePlay();
+        }
+
+        if (Input.GetKeyDown(KeyCode.Return))
+        {
+            // Audioの切り替え
+            plAudio.ChangeAttackAudio(mystatus);
+        }
+
+        if (Input.GetKey(KeyCode.Return))
+        {
+            Attack();
+            // 攻撃をしている時は動けない為return
+            return;
+        }
+
+        // Enterキーを離すまで吸い込みをする
+        // Flagが立っている時
+        if (Input.GetKeyUp(KeyCode.Return) && cheekFlag)
+        {
+            // 吸い込んだので膨らんでいる状態
+            mystatus = Status.cheek;
+            FatJudg(1.5f);
+        }
+
+        // 攻撃キーを離した時
+        if (Input.GetKeyUp(KeyCode.Return))
+        {
+            parcon.ParticleStop();
+            anim.SetBool("AttackFlag", false);
+            plAudio.AudioStop();
+        }
+        #endregion
 
         #region 移動処理
         Squat();        // しゃがむ
@@ -124,46 +167,20 @@ public class Player : Character
     }
 
     /// <summary>
-    /// Input関連
+    /// Playerの死
     /// </summary>
-    private void InputInfo()
+    private void DeathPlayerAnimation()
     {
-        // Nomalかつ攻撃キーを押した時
-        if (Input.GetKeyDown(KeyCode.Return) && mystatus == Status.normal)
-        {
-            // 吸い込みエフェクト
-            parcon.ParticlePlay();
-        }
-
-        if (Input.GetKeyDown(KeyCode.Return))
-        {
-            // Audioの切り替え
-            plAudio.ChangeAttackAudio(mystatus);
-        }
-
-        if (Input.GetKey(KeyCode.Return))
-        {
-            Attack();
-            // 攻撃をしている時は動けない為return
-            return;
-        }
-
-        // Enterキーを離すまで吸い込みをする
-        // Flagが立っている時
-        if (Input.GetKeyUp(KeyCode.Return) && cheekFlag)
-        {
-            // 吸い込んだので膨らんでいる状態
-            mystatus = Status.cheek;
-            FatJudg(1.5f);
-        }
-
-        // 攻撃キーを離した時
-        if (Input.GetKeyUp(KeyCode.Return))
-        {
-            parcon.ParticleStop();
-            anim.SetBool("AttackFlag", false);
-            plAudio.AudioStop();
-        }
+        anim.Play("DeathAnimation");
+        rb.velocity = new Vector2(0, 0);
+        deathFlag = true;
+        Jump();
+        BoxCollider2D boxCollider2D = GetComponent<BoxCollider2D>();
+        CapsuleCollider2D capsuleCollider2D = GetComponent<CapsuleCollider2D>();
+        CircleCollider2D circleCollider2D = GetComponent<CircleCollider2D>();
+        boxCollider2D.enabled = false;
+        capsuleCollider2D.enabled = false;
+        circleCollider2D.enabled = false;
     }
 
     /// <summary>
@@ -181,6 +198,7 @@ public class Player : Character
     {
         if (hp == 0 && life == 0 || life < 0)
         {
+            DeathPlayerAnimation();
             SceneManager.LoadScene("GameOverScene");
         }
     }

@@ -174,7 +174,8 @@ public class Character : MonoBehaviour
     /// <param name="direction">1:右 -1:左</param>
     private void Vacuum(int direction)
     {
-        Vector2 pos = new Vector2(this.transform.position.x + (direction * 2f), transform.position.y);
+        float distance = 2f;
+        Vector2 pos = new Vector2(this.transform.position.x + (direction * distance), transform.position.y);
         RaycastHit2D hit = Physics2D.Raycast(pos, new Vector2(direction * 1, 0), 1f);
         Debug.DrawLine(this.transform.position, pos, Color.red);
         if (hit.collider == null) { return; }
@@ -254,7 +255,6 @@ public class Character : MonoBehaviour
         this.fat = fat;
         this.transform.localScale = new Vector3(fat * directionTypeNum, 1, 1);
     }
-
 
     /// <summary>
     /// 接地判定
