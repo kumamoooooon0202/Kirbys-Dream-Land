@@ -548,7 +548,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: PUSH ANY BUTTON
+  m_Text: PUSH SPACE KEY
 --- !u!222 &1363350870
 CanvasRenderer:
   m_ObjectHideFlags: 0

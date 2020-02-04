@@ -9,7 +9,7 @@ public class Player : Character
     private int hp = 0;
     public int CharacerHp() { return hp; }
     [SerializeField] protected int max_hp = 6;
-    public static int life = 1;
+    public static int life = 2;
     [SerializeField] private float hoveringSpeed;
     private bool hoveringFlag = false;
     [SerializeField] private float invisibleTime;
@@ -31,9 +31,11 @@ public class Player : Character
         get { return deathFlag; }
         set { deathFlag = value; }
     }
+    [SerializeField] private AudioSource mainBgm;
 
     void Start()
     {
+        mainBgm.Play();
         anim = GetComponent<Animator>();
         rb = GetComponent<Rigidbody2D>();
         mystatus = Status.normal;
@@ -183,6 +185,7 @@ public class Player : Character
     /// </summary>
     private void DeathPlayerAnimation()
     {
+        mainBgm.Stop();
         plAudio.DeathAudio();
         anim.Play("DeathAnimation");
         rb.velocity = new Vector2(0, 0);

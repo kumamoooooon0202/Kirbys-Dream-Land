@@ -10,6 +10,7 @@ public class TitleSceneChange : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Return))
         {
             SceneManager.LoadScene("TitleScene");
+            Player.life = 2;
         }
     }
 }
