@@ -66,6 +66,11 @@ public class PlayerAudio : MonoBehaviour
         audioSource.Play();
     }
 
+    public void JumpAudio()
+    {
+        audioSource.PlayOneShot(jump);
+    }
+
     /// <summary>
     /// ダメージ音
     /// </summary>

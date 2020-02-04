@@ -161,6 +161,7 @@ MonoBehaviour:
   invisibleTime: 1
   time: 1
   squatFlag: 0
+  mainBgm: {fileID: 0}
 --- !u!114 &2492790688180023574
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5060,7 +5061,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 805ff61e82a2f874991b379e58e28d4c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  jump: {fileID: 0}
+  jump: {fileID: 8300000, guid: dbd41ac605da0514e87e6d1216f12bd6, type: 3}
   hovering: {fileID: 0}
   landing: {fileID: 0}
   run: {fileID: 0}

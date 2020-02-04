@@ -52,10 +52,6 @@ public class Player : Character
 
     void Update()
     {
-        if (Input.GetMouseButtonDown(0))
-        {
-            hp--;
-        }
         FallDeath();                            // 落下死判定
         if (hp <= 0 && deathFlag == false)
         {
@@ -249,6 +245,7 @@ public class Player : Character
     /// </summary>
     public override void Jump()
     {
+        plAudio.JumpAudio();
         base.Jump();
         //if (groundFlag == false) { return; }
         anim.SetTrigger("jumpFlag");
